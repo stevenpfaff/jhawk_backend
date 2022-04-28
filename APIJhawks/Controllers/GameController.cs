@@ -27,7 +27,7 @@ namespace APIJhawks.Controllers
         public JsonResult Get()
         {
             string query = @"
-                select * from dbo.Game";
+                select * from dbo.Games";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("PlayerAppCon");
             SqlDataReader myReader;
@@ -50,7 +50,7 @@ namespace APIJhawks.Controllers
         public JsonResult Post(Game gm)
         {
             string query = @"
-                    insert into dbo.Game
+                    insert into dbo.Games
                     (HomeTeam,AwayTeam,HomeScore,AwayScore) 
                     values
                     (
@@ -77,6 +77,35 @@ namespace APIJhawks.Controllers
             }
 
             return new JsonResult("Game Added Successfully");
+        }
+        [HttpPut]
+        public JsonResult Put(Game gm)
+        {
+            string query = @"
+                    update dbo.Games set                    
+                    HomeTeam='" + gm.HomeTeam + @"'
+                    ,AwayTeam='" + gm.AwayTeam + @"'
+                    ,HomeScore='" + gm.HomeScore + @"'
+                    ,AwayScore='" + gm.AwayScore + @"'
+                    where Id = " + gm.Id + @"
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("PlayerAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult("Game Updated Successfully");
         }
     }
 }
