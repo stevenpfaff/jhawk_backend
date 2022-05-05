@@ -51,13 +51,14 @@ namespace APIJhawks.Controllers
         {
             string query = @"
                     insert into dbo.Games
-                    (HomeTeam,AwayTeam,HomeScore,AwayScore) 
+                    (HomeTeam,AwayTeam,HomeScore,AwayScore,Date) 
                     values
                     (
                     '" + gm.HomeTeam + @"'
                     ,'" + gm.AwayTeam + @"'
                     ,'" + gm.HomeScore + @"'
                     ,'" + gm.AwayScore + @"'
+                    ,'" + gm.Date + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -87,6 +88,7 @@ namespace APIJhawks.Controllers
                     ,AwayTeam='" + gm.AwayTeam + @"'
                     ,HomeScore='" + gm.HomeScore + @"'
                     ,AwayScore='" + gm.AwayScore + @"'
+                    ,Date='" + gm.Date + @"'
                     where Id = " + gm.Id + @"
                     ";
             DataTable table = new DataTable();

@@ -40,5 +40,6 @@ namespace APIJhawks.Models
         public float OBP { get; set; }
         public float OPS { get; set; }
         public float FIP { get; set; }
+        public int CCS { get; set; }
     }
 }

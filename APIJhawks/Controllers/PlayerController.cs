@@ -51,7 +51,7 @@ namespace APIJhawks.Controllers
         {
             string query = @"
                     insert into dbo.Player
-                    (Name, GP, AB, H, R, RBI,DBL,TPL, HR, SLG, BB, K, IP, Walks, Strikeouts, BALL, STRK, PT, PO, A, E, FP, SB, CS,SBP, AVG, WHIP, FIP, OBP, OPS, ERA)
+                    (Name, GP, AB, H, R, RBI,DBL,TPL, HR, SLG, BB, K, IP, Walks, Strikeouts, BALL, STRK, PT, PO, A, E, FP, SB, CS,SBP, AVG, WHIP, FIP, OBP, OPS, ERA, CCS)
                     values 
                     (
                     '" + ply.Name + @"'
@@ -85,6 +85,7 @@ namespace APIJhawks.Controllers
                     ,'" + ply.OBP + @"'
                     ,'" + ply.FIP + @"'
                     ,'" + ply.ERA + @"'
+                    ,'" + ply.CCS + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -141,7 +142,8 @@ namespace APIJhawks.Controllers
                     ,OBP='" + ply.OBP + @"'
                     ,FIP='" + ply.FIP + @"'
                     ,ERA='" + ply.ERA + @"'
-                    where Id = "+ply.Id+@"
+                    ,ERA='" + ply.CCS + @"'
+                    where Id = " + ply.Id+@"
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("PlayerAppCon");
