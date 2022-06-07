@@ -21,7 +21,7 @@ namespace APIJhawks.Models
         public float SLG { get; set; }
         public int BB { get; set; }
         public int K { get; set; }
-        public int IP { get; set; }
+        public float IP { get; set; }
         public int Walks { get; set; }
         public int Strikeouts { get; set; }
         public int BALL { get; set; }
